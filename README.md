@@ -1,0 +1,1 @@
+# bulgarian_foreign_words_replacer
