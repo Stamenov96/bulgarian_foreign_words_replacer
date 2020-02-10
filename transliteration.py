@@ -1,6 +1,6 @@
 def rules(letter):
     letter = letter.lower()
-    switcher = {
+    transliteral_dictionary = {
         " ": " ",
         "а": "a",
         "б": "b",
@@ -38,27 +38,26 @@ def rules(letter):
         "йо": "yo",
         "ия": "ia",
     }
-    return switcher.get(letter, "err")
+    return transliteral_dictionary.get(letter)
 
 
 def transliterate(bulgarian_word):
     return_string = ""
-    tmp = ""
     flag = False
     for i in range(0, len(bulgarian_word)):
         if flag is True:
             flag = False
             continue
 
+        tmp = bulgarian_word[i]
+
         if (bulgarian_word[i] is 'д' and (bulgarian_word[i+1] is 'з' or bulgarian_word[i+1] is 'ж')) or (bulgarian_word[i] is 'ь' and bulgarian_word[i+1] is 'o') or (bulgarian_word[i] is 'й' and bulgarian_word[i+1] is 'o') or (bulgarian_word[i] is 'и' and bulgarian_word[i+1] is 'я'):
-            tmp = bulgarian_word[i] + bulgarian_word[i+1]
+            tmp += bulgarian_word[i+1]
             flag = True
-        else:
-            tmp = bulgarian_word[i]
 
         english_letter = rules(tmp)
-        if(english_letter is "err"):
-            return_string = "Error"
+        if not english_letter:
+            return_string = "Some char doesn't exists in the dictionary"
             break
         else:
             return_string += english_letter
