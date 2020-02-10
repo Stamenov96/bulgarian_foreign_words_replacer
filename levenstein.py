@@ -31,36 +31,7 @@ def levenshtein_ratio_and_distance(source, target, ratio_calc=False):
         ratio = ((len(source)+len(target)) - distance[row][col]) / (len(source)+len(target))
         return ratio
     else:
-        print(f'{source} and {target}')
-        print(distance)
+        # print(f'{source} and {target}')
+        # print(distance)
         return distance[row][col]
-
-
-def match_strings(string, file_name_map, preprocess_method):
-    max_raito = -1
-    best_key = ""
-    best_value = ""
-    boost = 0.0
-    processed_str = preprocess_method(string)
-    for key, value in file_name_map.items():
-        # flag = True
-        preprocessed_value = preprocess_method(value)
-        # for i in processed_str:
-        #     flag = flag and (i in preprocessed_value)
-        # if flag:
-        #     boost = 0.1
-        # else:
-        #     boost = 0.0
-        ratio = levenshtein_ratio_and_distance(processed_str, preprocessed_value, ratio_calc=True)+boost
-
-        if ratio > max_raito:
-            max_raito = ratio
-            best_key = key
-            best_value = value
-        elif ratio == max_raito:
-            if levenshtein_ratio_and_distance(processed_str, preprocess_method(value), ratio_calc=False) < levenshtein_ratio_and_distance(processed_str, preprocess_method(best_value), ratio_calc=False):
-                best_key = key
-                best_value = value
-    return best_key, best_value
-
 
