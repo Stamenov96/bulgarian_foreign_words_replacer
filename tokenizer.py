@@ -1,14 +1,8 @@
 import string
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 
 
 def tokenize_text(input_file_path):
-    # load data
-    filename = 'metamorphosis_clean.txt'
-    # file = open(filename, 'rt')
-    # text = file.read()
-    # file.close()
     with open(input_file_path, 'rt') as input_file:
         text = input_file.read()
 
@@ -16,14 +10,14 @@ def tokenize_text(input_file_path):
     tokens = word_tokenize(text)
     # convert to lower case
     tokens = [w.lower() for w in tokens]
-    # remove punctuation from each word
+    # remove punctuation
     table = str.maketrans('', '', string.punctuation)
     stripped = [w.translate(table) for w in tokens]
     # remove remaining tokens that are not alphabetic
     words = [word for word in stripped if word.isalpha()]
     # filter out stop words
     stop_words = read_stop_words("assets/stopwords.txt")
-    words = [w for w in words if not w in stop_words]
+    words = [w for w in words if w not in stop_words]
     return words
 
 

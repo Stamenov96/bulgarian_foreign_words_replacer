@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 
@@ -9,14 +10,13 @@ class Stemmer:
         self.stemming_rules = self.load_stemming_rules()
 
     def load_stemming_rules(self):
-        path_to_files = []
-        path_to_files.append("assets/stemming_rules/stem_rules_context_1.txt")
-        path_to_files.append("assets/stemming_rules/stem_rules_context_2.txt")
-        path_to_files.append("assets/stemming_rules/stem_rules_context_3.txt")
+        path_to_files = ["assets/stemming_rules/stem_rules_context_1.txt",
+                         "assets/stemming_rules/stem_rules_context_2.txt",
+                         "assets/stemming_rules/stem_rules_context_3.txt"]
         steaming_rules = {}
 
         for path in path_to_files:
-            with open(path, encoding='utf8', mode='r') as rules_file:
+            with open(path, encoding='utf-8', mode='r') as rules_file:
                 for line in rules_file:
                     rule_line = line.rstrip('\n')
                     m = self.p.search(rule_line)
@@ -36,7 +36,3 @@ class Stemmer:
             if suffix:
                 return word[0:i]+suffix
         return word
-
-
-if __name__ == '__main__':
-    new_stemmer = Stemmer()
